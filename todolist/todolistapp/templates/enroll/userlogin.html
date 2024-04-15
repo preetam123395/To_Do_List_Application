@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+     
+    
+</head>
+<body>
+    <form action="" method="post" novalidate class="login-form">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors|striptags }} <br><br>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a href="{% url 'signup' %}" class="btn btn-secondary">Signup</a>
+    </form>
+</body>
+</html>
+
